@@ -17,32 +17,36 @@ export default function SearchPage() {
   const today = new Date().toISOString().split('T')[0];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-black">
-      {/* Hero Image - Full Bleed */}
+    <main className="relative min-h-screen overflow-hidden bg-[#B8AE9C]">
+      {/* Video Background - Water Ripples */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&q=90"
-          alt="Serene turquoise infinity pool"
-          fill
-          priority
-          quality={90}
-          className="object-cover"
-          sizes="100vw"
-        />
-        {/* Soft gradient overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-black/10 to-black/30" />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
+        >
+          {/* Beige/sand water ripples */}
+          <source
+            src="https://cdn.pixabay.com/video/2020/05/17/39607-421158397_large.mp4"
+            type="video/mp4"
+          />
+        </video>
+        {/* Subtle overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#B8AE9C]/30 to-[#A69B88]/20" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen flex-col">
         {/* Top Navigation */}
         <nav className="flex items-center justify-between px-6 py-6 md:px-12 lg:px-20">
-          <h1 className="text-2xl font-bold tracking-tight text-white">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-800">
             LUXURIA
           </h1>
-          <div className="flex items-center gap-6 text-sm font-medium text-white">
-            <button className="hover:opacity-80 transition-opacity">Search</button>
-            <button className="hover:opacity-80 transition-opacity">Sign In</button>
+          <div className="flex items-center gap-6 text-sm font-medium text-gray-700">
+            <button className="hover:opacity-70 transition-opacity">Search</button>
+            <button className="hover:opacity-70 transition-opacity">Sign In</button>
           </div>
         </nav>
 
@@ -50,7 +54,7 @@ export default function SearchPage() {
         <div className="flex flex-1 flex-col justify-center px-6 pb-20 pt-12 md:px-12 lg:px-20">
           {/* Hero Headline */}
           <div className="mb-12 max-w-2xl animate-fade-in">
-            <h2 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h2 className="text-4xl font-bold leading-tight tracking-tight text-gray-800 md:text-5xl lg:text-6xl">
               The world's finest hotels,
               <br />
               at your fingertips
@@ -161,7 +165,7 @@ export default function SearchPage() {
 
           {/* Trust Badges */}
           <div 
-            className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-white/80 animate-fade-in md:gap-6"
+            className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600 animate-fade-in md:gap-6"
             style={{
               animationDelay: '0.4s',
               animationFillMode: 'both'
