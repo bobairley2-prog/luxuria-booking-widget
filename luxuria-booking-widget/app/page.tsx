@@ -1,148 +1,177 @@
 'use client';
 
 import { useState } from 'react';
-import { SearchBar } from '@/components/search/SearchBar';
-import { DatePicker } from '@/components/search/DatePicker';
-import { GuestSelector } from '@/components/search/GuestSelector';
-import { Button } from '@/components/ui/Button';
+import Image from 'next/image';
 
 export default function SearchPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [checkIn, setCheckIn] = useState<Date | null>(null);
-  const [checkOut, setCheckOut] = useState<Date | null>(null);
-  const [guests, setGuests] = useState({ adults: 2, children: 0 });
+  const [destination, setDestination] = useState('');
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [guests, setGuests] = useState('2');
 
   const handleSearch = () => {
-    // TODO: Navigate to results page with search params
-    console.log('Search:', { searchQuery, checkIn, checkOut, guests });
+    console.log('Search:', { destination, checkIn, checkOut, guests });
+    // TODO: Navigate to results
   };
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-luxury-cream-50">
-      {/* Video Background */}
-      <div className="fixed inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
-        >
-          {/* Serene pool water ripples - Pexels Video ID: 11470677 */}
-          <source
-            src="https://player.vimeo.com/external/516481302.hd.mp4?s=6b5555a6f2c5c0e0d9b3d7c6e8c8d9c1e6c2c2c2&profile_id=175"
-            type="video/mp4"
-          />
-          {/* Fallback: Spa water */}
-          <source
-            src="https://cdn.pixabay.com/video/2023/05/28/164738-829831045_large.mp4"
-            type="video/mp4"
-          />
-        </video>
-        {/* Soft overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-luxury-cream-50/85 via-luxury-cream-100/70 to-luxury-cream-50/85" />
+    <main className="relative min-h-screen overflow-hidden bg-black">
+      {/* Hero Image - Full Bleed */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1920&q=90"
+          alt="Luxury infinity pool overlooking the ocean"
+          fill
+          priority
+          quality={90}
+          className="object-cover"
+          sizes="100vw"
+        />
+        {/* Dark gradient overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40" />
       </div>
 
-      {/* Search Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-20">
-        <div className="w-full max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12 animate-fade-in">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-luxury-gray-900 mb-4 tracking-tight">
-              Find Your Sanctuary
-            </h1>
-            <p className="text-lg md:text-xl text-luxury-gray-600 font-light max-w-2xl mx-auto">
-              Discover luxury hotels and resorts that redefine exceptional
-            </p>
+      {/* Content */}
+      <div className="relative z-10 flex min-h-screen flex-col">
+        {/* Top Navigation */}
+        <nav className="flex items-center justify-between px-6 py-6 md:px-12 lg:px-20">
+          <h1 className="text-2xl font-bold tracking-tight text-white">
+            LUXURIA
+          </h1>
+          <div className="flex items-center gap-6 text-sm font-medium text-white">
+            <button className="hover:opacity-80 transition-opacity">Search</button>
+            <button className="hover:opacity-80 transition-opacity">Sign In</button>
+          </div>
+        </nav>
+
+        {/* Hero Content */}
+        <div className="flex flex-1 flex-col justify-center px-6 pb-20 pt-12 md:px-12 lg:px-20">
+          {/* Hero Headline */}
+          <div className="mb-12 max-w-2xl animate-fade-in">
+            <h2 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
+              The world's finest hotels,
+              <br />
+              at your fingertips
+            </h2>
           </div>
 
           {/* Search Card */}
-          <div className="bg-luxury-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-10 lg:p-12 border border-luxury-cream-300/50">
-            {/* Search Bar */}
+          <div 
+            className="mx-auto w-full max-w-4xl animate-slide-up rounded-2xl bg-white p-8 shadow-2xl md:p-12"
+            style={{
+              animationDelay: '0.2s',
+              animationFillMode: 'both'
+            }}
+          >
+            {/* Search Input */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-luxury-gray-700 mb-2">
-                Hotel or Destination
+              <label 
+                htmlFor="destination" 
+                className="mb-2 block text-sm font-medium text-gray-600"
+              >
+                Where to?
               </label>
-              <SearchBar
-                value={searchQuery}
-                onChange={setSearchQuery}
-                placeholder="Search by hotel name or destination (e.g. Cancun, Times Square)"
+              <input
+                id="destination"
+                type="text"
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+                placeholder="Hotel name or destination"
+                className="w-full rounded-lg border border-gray-200 px-4 py-3 text-base text-black placeholder-gray-400 transition-colors focus:border-black focus:outline-none focus:ring-0"
               />
             </div>
 
-            {/* Date Range */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {/* Date and Guest Inputs */}
+            <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+              {/* Check-in */}
               <div>
-                <label className="block text-sm font-medium text-luxury-gray-700 mb-2">
+                <label 
+                  htmlFor="checkin" 
+                  className="mb-2 block text-sm font-medium text-gray-600"
+                >
                   Check-in
                 </label>
-                <DatePicker
-                  selected={checkIn}
-                  onChange={setCheckIn}
-                  minDate={new Date()}
-                  placeholderText="Select date"
+                <input
+                  id="checkin"
+                  type="date"
+                  value={checkIn}
+                  onChange={(e) => setCheckIn(e.target.value)}
+                  min={today}
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 text-base text-black transition-colors focus:border-black focus:outline-none focus:ring-0"
                 />
               </div>
+
+              {/* Check-out */}
               <div>
-                <label className="block text-sm font-medium text-luxury-gray-700 mb-2">
+                <label 
+                  htmlFor="checkout" 
+                  className="mb-2 block text-sm font-medium text-gray-600"
+                >
                   Check-out
                 </label>
-                <DatePicker
-                  selected={checkOut}
-                  onChange={setCheckOut}
-                  minDate={checkIn || new Date()}
-                  placeholderText="Select date"
+                <input
+                  id="checkout"
+                  type="date"
+                  value={checkOut}
+                  onChange={(e) => setCheckOut(e.target.value)}
+                  min={checkIn || today}
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 text-base text-black transition-colors focus:border-black focus:outline-none focus:ring-0"
                 />
               </div>
+
+              {/* Guests */}
+              <div>
+                <label 
+                  htmlFor="guests" 
+                  className="mb-2 block text-sm font-medium text-gray-600"
+                >
+                  Guests
+                </label>
+                <select
+                  id="guests"
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                  className="w-full rounded-lg border border-gray-200 px-4 py-3 text-base text-black transition-colors focus:border-black focus:outline-none focus:ring-0"
+                >
+                  <option value="1">1 guest</option>
+                  <option value="2">2 guests</option>
+                  <option value="3">3 guests</option>
+                  <option value="4">4 guests</option>
+                  <option value="5">5 guests</option>
+                  <option value="6">6 guests</option>
+                  <option value="7">7 guests</option>
+                  <option value="8">8+ guests</option>
+                </select>
+              </div>
             </div>
 
-            {/* Guest Selector */}
-            <div className="mb-8">
-              <label className="block text-sm font-medium text-luxury-gray-700 mb-2">
-                Guests
-              </label>
-              <GuestSelector
-                adults={guests.adults}
-                children={guests.children}
-                onChange={setGuests}
-              />
+            {/* CTA Button */}
+            <div className="flex justify-end">
+              <button
+                onClick={handleSearch}
+                disabled={!destination || !checkIn || !checkOut}
+                className="rounded-lg bg-black px-8 py-3.5 text-base font-semibold text-white transition-all hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Search Hotels →
+              </button>
             </div>
-
-            {/* Search Button */}
-            <Button
-              onClick={handleSearch}
-              disabled={!searchQuery || !checkIn || !checkOut}
-              className="w-full py-4 text-lg font-medium bg-luxury-accent hover:bg-luxury-accent-dark text-luxury-white rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
-            >
-              Search Availability
-            </Button>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="mt-10 text-center">
-            <p className="text-sm text-luxury-gray-500 mb-3">
-              Trusted by discerning travelers worldwide
-            </p>
-            <div className="flex items-center justify-center gap-8 text-luxury-gray-400">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <span className="text-sm">50+ Five-Star Properties</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm">Secure Booking</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                </svg>
-                <span className="text-sm">24/7 Support</span>
-              </div>
-            </div>
+          {/* Trust Badges */}
+          <div 
+            className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-white/80 animate-fade-in md:gap-6"
+            style={{
+              animationDelay: '0.4s',
+              animationFillMode: 'both'
+            }}
+          >
+            <span>50+ five-star properties</span>
+            <span className="hidden md:inline">•</span>
+            <span>Secure booking</span>
+            <span className="hidden md:inline">•</span>
+            <span>24/7 support</span>
           </div>
         </div>
       </div>

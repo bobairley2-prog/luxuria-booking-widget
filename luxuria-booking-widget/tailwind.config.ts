@@ -9,44 +9,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Beige/Cream Palette (serene luxury aesthetic)
-        luxury: {
-          // Core beiges/creams
-          cream: {
-            50: "#FFFEF9",    // Lightest cream (backgrounds)
-            100: "#FAF8F3",   // Soft cream (cards, sections)
-            200: "#F5F2EA",   // Light beige
-            300: "#EBE6DB",   // Medium beige
-            400: "#DDD6C7",   // Tan
-            500: "#C9BEA8",   // Warm tan
-          },
-          // Neutral grays (for text, borders)
-          gray: {
-            50: "#F9F9F8",
-            100: "#F0F0EF",
-            200: "#E3E3E1",
-            300: "#CACAC6",
-            400: "#A8A8A3",
-            500: "#78786F",
-            600: "#5A5A52",
-            700: "#424239",
-            800: "#2E2E27",
-            900: "#1A1A15",
-          },
-          // Black/white (minimal use)
-          black: "#1A1A15",
-          white: "#FFFEF9",
-          // Accent (minimal gold - only for CTAs)
-          accent: {
-            light: "#E8D4B0",
-            DEFAULT: "#C9A865",
-            dark: "#A68951",
-          },
+        // Monochrome + Accent (Apple-inspired minimalism)
+        white: "#FFFFFF",
+        black: "#000000",
+        gray: {
+          50: "#FAFAFA",
+          100: "#F5F5F5",
+          200: "#E5E7EB",
+          300: "#D1D5DB",
+          400: "#9CA3AF",
+          500: "#6B7280",
+          600: "#64748B",
+          700: "#374151",
+          800: "#1F2937",
+          900: "#0F172A",
+        },
+        accent: {
+          DEFAULT: "#0EA5E9",  // Teal
+          dark: "#0284C7",
         },
         // Semantic colors
-        success: "#4A7C59",
-        error: "#B85C5C",
-        warning: "#D4A574",
+        success: "#10B981",
+        error: "#EF4444",
+        warning: "#F59E0B",
       },
       fontFamily: {
         // Serif for headings (Crimson Pro)
