@@ -21,16 +21,16 @@ export default function SearchPage() {
       {/* Hero Image - Full Bleed */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1920&q=90"
-          alt="Luxury infinity pool overlooking the ocean"
+          src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&q=90"
+          alt="Serene turquoise infinity pool"
           fill
           priority
           quality={90}
           className="object-cover"
           sizes="100vw"
         />
-        {/* Dark gradient overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40" />
+        {/* Soft gradient overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-black/10 to-black/30" />
       </div>
 
       {/* Content */}
